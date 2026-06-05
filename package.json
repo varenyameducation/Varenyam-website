@@ -1,0 +1,27 @@
+{
+  "name": "varenyam-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Public marketing website for Varenyam Coaching Institute",
+  "scripts": {
+    "dev": "next dev -p 4100",
+    "build": "next build",
+    "start": "next start -p 4100",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "lucide-react": "^0.454.0",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5"
+  }
+}
