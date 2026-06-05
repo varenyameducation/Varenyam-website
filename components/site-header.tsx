@@ -51,14 +51,23 @@ export function SiteHeader() {
           </a>
         </nav>
 
-        <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-white lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <a
+            href={`tel:${tel}`}
+            aria-label="Call now"
+            className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3 text-sm font-semibold text-white backdrop-blur-md"
+          >
+            <Phone size={15} /> Call
+          </a>
+          <button
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-white"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {open && (

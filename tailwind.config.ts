@@ -23,7 +23,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['"Clash Display"', "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ['"General Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
         sans: ['"Satoshi"', "ui-sans-serif", "system-ui", "sans-serif"],
       },
       container: {
