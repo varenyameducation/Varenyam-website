@@ -10,11 +10,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swa
 export const metadata: Metadata = {
   metadataBase: new URL("https://varenyam.com"),
   title: {
-    default: `${site.name} — JEE · NEET · CBSE Coaching`,
+    default: `${site.name} — Coaching for Classes 6–12 in Indore`,
     template: `%s · ${site.shortName}`,
   },
   description: site.description,
-  keywords: ["JEE coaching", "NEET coaching", "CBSE", "Varenyam", "coaching institute"],
+  keywords: ["coaching Indore", "CBSE coaching", "ICSE", "Class 10 board", "Class 12 board", "Science Commerce coaching", "Varenyam"],
   openGraph: {
     title: site.name,
     description: site.description,

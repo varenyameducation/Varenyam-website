@@ -14,21 +14,16 @@ export function SiteHeader() {
       <div className="container-x flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-teal">
-            <Image
-              src="/brand/varenyam-logo-mark.png"
-              alt={site.name}
-              width={28}
-              height={26}
-              priority
-            />
+            <Image src="/brand/varenyam-logo-mark.png" alt={site.name} width={28} height={26} priority />
           </span>
-          <span className="text-lg font-bold tracking-tight text-brand-teal">
-            {site.shortName}
+          <span className="flex flex-col leading-none">
+            <span className="text-lg font-bold tracking-tight text-brand-teal">{site.shortName}</span>
+            <span className="text-[10px] font-medium uppercase tracking-wider text-brand-red">{site.tagline}</span>
           </span>
         </Link>
 
         {/* desktop nav */}
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -38,14 +33,14 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <a href={`tel:${site.contact.phone}`} className="btn-primary">
+          <a href={`tel:${site.primaryPhone.replace(/\s/g, "")}`} className="btn-primary">
             <Phone size={16} /> Call Now
           </a>
         </nav>
 
         {/* mobile toggle */}
         <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-brand-teal md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-brand-teal lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -56,7 +51,7 @@ export function SiteHeader() {
 
       {/* mobile drawer */}
       {open && (
-        <nav className="border-t border-slate-200 bg-white md:hidden">
+        <nav className="border-t border-slate-200 bg-white lg:hidden">
           <div className="container-x flex flex-col py-3">
             {nav.map((item) => (
               <Link
@@ -68,7 +63,7 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <a href={`tel:${site.contact.phone}`} className="btn-primary mt-2">
+            <a href={`tel:${site.primaryPhone.replace(/\s/g, "")}`} className="btn-primary mt-2">
               <Phone size={16} /> Call Now
             </a>
           </div>

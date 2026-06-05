@@ -18,7 +18,7 @@ export function ContactForm() {
     const course = String(data.get("course") || "");
     const message = String(data.get("message") || "");
     const body = `Name: ${name}%0D%0APhone: ${phone}%0D%0ACourse: ${course}%0D%0A%0D%0A${message}`;
-    window.location.href = `mailto:${site.contact.email}?subject=Enquiry from ${encodeURIComponent(
+    window.location.href = `mailto:${site.email}?subject=Enquiry from ${encodeURIComponent(
       name,
     )}&body=${body}`;
     setSent(true);
@@ -49,8 +49,8 @@ export function ContactForm() {
       {sent && (
         <p className="text-sm text-brand-teal">
           Opening your email app to send the enquiry. If nothing happens, email us directly at{" "}
-          <a href={`mailto:${site.contact.email}`} className="font-semibold underline">
-            {site.contact.email}
+          <a href={`mailto:${site.email}`} className="font-semibold underline">
+            {site.email}
           </a>
           .
         </p>

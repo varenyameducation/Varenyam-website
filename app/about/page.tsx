@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Target, Heart, Award } from "lucide-react";
-import { site, stats } from "@/lib/site";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { site, stats, highlights } from "@/lib/site";
 import { PageHero } from "@/components/page-hero";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `About ${site.name} — our mission, approach, and track record.`,
+  description: `About ${site.name} — our approach, strengths and track record in Indore.`,
 };
 
 export default function AboutPage() {
@@ -14,23 +15,26 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Who We Are"
         title="About Varenyam"
-        subtitle="A coaching institute built on focused teaching, disciplined practice, and genuine care for every student's progress."
+        subtitle={site.promise}
       />
 
       <section className="section">
         <div className="container-x grid gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">Our Mission</h2>
+            <h2 className="text-2xl font-bold text-slate-900">Committed to academic excellence</h2>
             <p className="mt-4 leading-relaxed text-slate-600">
-              At {site.name}, we believe strong results come from clarity, not pressure. Our
-              programmes combine concept-first teaching with a structured test-practice system so
-              students build real understanding and the exam temperament to apply it.
+              At {site.name}, we provide result-driven coaching for students from Class 6 to 12,
+              specializing in the Science and Commerce streams across CBSE, ICSE and State Board.
+              Our expert faculty, personalized attention and result-oriented approach ensure that
+              every student achieves their full potential.
             </p>
             <p className="mt-4 leading-relaxed text-slate-600">
-              From Foundation classes to JEE and NEET preparation, every course is designed around
-              the syllabus, paced for retention, and backed by faculty who track each student's
-              progress closely.
+              We focus not just on scoring well in exams, but on building a deep understanding of
+              concepts that helps students throughout their academic and professional journeys.
             </p>
+            <Link href="/directors" className="mt-6 inline-flex items-center gap-2 font-semibold text-brand-teal hover:underline">
+              Meet our directors <ArrowRight size={16} />
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {stats.map((s) => (
@@ -44,20 +48,19 @@ export default function AboutPage() {
       </section>
 
       <section className="section bg-slate-50">
-        <div className="container-x grid gap-6 sm:grid-cols-3">
-          {[
-            { icon: Target, title: "Focused", body: "Small batches and a clear syllabus roadmap keep every student on track." },
-            { icon: Heart, title: "Supportive", body: "Approachable faculty and regular doubt-clearing build real confidence." },
-            { icon: Award, title: "Proven", body: "A consistent record of selections and strong board results year on year." },
-          ].map((v) => (
-            <div key={v.title} className="rounded-2xl border border-slate-200 bg-white p-6">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-red/10 text-brand-red">
-                <v.icon size={22} />
-              </span>
-              <h3 className="mt-4 text-lg font-semibold text-slate-900">{v.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{v.body}</p>
-            </div>
-          ))}
+        <div className="container-x">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow">What Makes Us Unique</p>
+            <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">Why students choose Varenyam</h2>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {highlights.map((h) => (
+              <div key={h.title} className="rounded-2xl border border-slate-200 bg-white p-6">
+                <h3 className="text-lg font-semibold text-slate-900">{h.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{h.body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>
