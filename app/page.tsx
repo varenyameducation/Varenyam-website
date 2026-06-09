@@ -1,9 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Phone, GraduationCap, Users, ClipboardCheck, MessageCircleQuestion, BookOpen, FileBarChart, Trophy, Quote } from "lucide-react";
+import {
+  ArrowRight, GraduationCap, Users, ClipboardCheck, MessageCircleQuestion,
+  BookOpen, FileBarChart, Quote,
+} from "lucide-react";
 import { site, highlights, courses, toppers, testimonials, directors } from "@/lib/site";
 import { CourseCard } from "@/components/course-card";
 import { Hero } from "@/components/hero";
+import { TopperMarquee } from "@/components/topper-marquee";
+import { CtaBand } from "@/components/cta-band";
 
 const highlightIcons = [GraduationCap, Users, ClipboardCheck, MessageCircleQuestion, BookOpen, FileBarChart];
 
@@ -13,9 +18,9 @@ export default function HomePage() {
       <Hero />
 
       {/* ── Why Varenyam ───────────────────────────────────── */}
-      <section className="section">
+      <section className="relative section bg-mesh">
         <div className="container-x">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="reveal mx-auto max-w-2xl text-center">
             <p className="eyebrow">Why Varenyam</p>
             <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">
               A system built around how students actually learn
@@ -25,12 +30,17 @@ export default function HomePage() {
             {highlights.map((h, i) => {
               const Icon = highlightIcons[i % highlightIcons.length];
               return (
-                <div key={h.title} className="group rounded-2xl border border-slate-200 p-6 transition-colors hover:border-brand-teal/40">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-teal/10 text-brand-teal">
+                <div
+                  key={h.title}
+                  style={{ transitionDelay: `${(i % 3) * 80}ms` }}
+                  className="reveal card card-hover group relative overflow-hidden p-7"
+                >
+                  <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 -translate-y-8 translate-x-8 rounded-full bg-brand-teal/[0.06] transition-transform duration-500 group-hover:scale-[1.8]" />
+                  <span className="icon-tile relative transition-transform duration-300 group-hover:-translate-y-0.5">
                     <Icon size={22} />
                   </span>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{h.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{h.body}</p>
+                  <h3 className="relative mt-5 text-lg font-semibold text-slate-900">{h.title}</h3>
+                  <p className="relative mt-2 text-sm leading-relaxed text-slate-600">{h.body}</p>
                 </div>
               );
             })}
@@ -38,52 +48,60 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Courses ────────────────────────────────────────── */}
-      <section className="section bg-slate-50">
+      {/* ── Programmes ─────────────────────────────────────── */}
+      <section className="section bg-surface">
         <div className="container-x">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div className="reveal flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p className="eyebrow">Programmes</p>
               <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">Courses for every stage</h2>
             </div>
-            <Link href="/courses" className="text-sm font-semibold text-brand-teal hover:underline">
-              View all courses & fees →
+            <Link href="/courses" className="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand-teal">
+              View all courses &amp; fees
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {courses.map((c) => (
-              <CourseCard key={c.slug} course={c} />
+            {courses.map((c, i) => (
+              <div key={c.slug} style={{ transitionDelay: `${i * 90}ms` }} className="reveal flex">
+                <CourseCard course={c} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Results ────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+      <section className="relative section">
+        <div className="pointer-events-none absolute inset-0 bg-dots-ink opacity-50" />
+        <div className="container-x relative">
+          <div className="reveal flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p className="eyebrow">Student Success</p>
               <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">Real results, real aspirations</h2>
             </div>
-            <Link href="/results" className="text-sm font-semibold text-brand-teal hover:underline">
-              See all toppers →
+            <Link href="/results" className="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand-teal">
+              See all toppers
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {toppers.slice(0, 6).map((t) => (
-              <div key={t.name} className="flex flex-col items-center rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm">
-                <Trophy size={18} className="text-brand-gold" />
-                <p className="mt-2 font-display text-xl font-bold text-brand-teal">{t.score}</p>
-                <p className="mt-1 text-xs font-semibold text-slate-700">{t.name}</p>
-              </div>
-            ))}
-          </div>
+        </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {testimonials.map((t) => (
-              <figure key={t.name} className="rounded-2xl bg-slate-50 p-6 sm:p-8">
-                <Quote size={26} className="text-brand-gold" />
+        {/* full-bleed marquee */}
+        <div className="reveal relative mt-12">
+          <TopperMarquee items={toppers} />
+        </div>
+
+        <div className="container-x relative">
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {testimonials.map((t, i) => (
+              <figure
+                key={t.name}
+                style={{ transitionDelay: `${i * 90}ms` }}
+                className="reveal card relative overflow-hidden p-6 sm:p-8"
+              >
+                <span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-brand-teal to-brand-cyan" />
+                <Quote size={30} className="text-brand-gold/80" />
                 <blockquote className="mt-3 leading-relaxed text-slate-700">{t.quote}</blockquote>
                 <figcaption className="mt-4 text-sm">
                   <span className="font-semibold text-slate-900">{t.name}</span>
@@ -96,57 +114,51 @@ export default function HomePage() {
       </section>
 
       {/* ── Directors ──────────────────────────────────────── */}
-      <section className="section bg-slate-50">
+      <section className="section bg-surface">
         <div className="container-x">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="reveal mx-auto max-w-2xl text-center">
             <p className="eyebrow">Meet Our Team Leaders</p>
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-900 sm:text-4xl">Learn from the best minds</h2>
+            <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">Learn from the best minds</h2>
           </div>
-          <div className="mt-14 grid gap-6 sm:grid-cols-3">
-            {directors.map((d) => (
-              <article key={d.name} className="overflow-hidden rounded-2xl border border-slate-200 bg-white text-center shadow-sm">
-                <div className="aspect-[4/5] w-full overflow-hidden bg-slate-100">
-                  <Image src={d.photo} alt={d.name} width={700} height={850} className="h-full w-full object-cover" />
+          <div className="mt-6 grid gap-7 sm:grid-cols-3">
+            {directors.map((d, i) => (
+              <article
+                key={d.name}
+                style={{ transitionDelay: `${i * 90}ms` }}
+                className="reveal card card-hover group overflow-hidden"
+              >
+                <div className="relative aspect-[7/7] w-full overflow-hidden bg-slate-100">
+                  <Image
+                    src={d.photo}
+                    alt={d.name}
+                    width={700}
+                    height={850}
+                    className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy/70 to-transparent" />
+                  <span className="absolute bottom-3 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-red backdrop-blur">
+                    {d.role}
+                  </span>
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-semibold text-slate-900">{d.name}</h3>
-                  <p className="text-sm font-medium text-brand-red">{d.role}</p>
                   <p className="mt-1 text-xs text-slate-500">{d.credential}</p>
+                  <Link
+                    href="/directors"
+                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-teal"
+                  >
+                    Read message
+                    <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+                  </Link>
                 </div>
               </article>
             ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link href="/directors" className="text-sm font-semibold text-brand-teal hover:underline">
-              Read their messages →
-            </Link>
           </div>
         </div>
       </section>
 
       {/* ── CTA ────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
-          <div className="relative isolate grain overflow-hidden rounded-[2rem] bg-ink px-8 py-16 text-center text-white sm:px-16">
-            <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-            <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-cyan/20 blur-[100px]" />
-            <div className="relative">
-              <h2 className="font-display text-3xl font-bold sm:text-4xl">Your dream score starts with the right guidance</h2>
-              <p className="mx-auto mt-4 max-w-xl text-white/70">
-                Join the students who trusted Varenyam for their board preparation. Visit a centre or call us today.
-              </p>
-              <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                <Link href="/contact" className="btn-cta px-8">
-                  Book a Free Demo <ArrowRight size={18} />
-                </Link>
-                <a href={`tel:${site.primaryPhone.replace(/\s/g, "")}`} className="btn-glass px-8">
-                  <Phone size={16} /> Call {site.primaryPhone}
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CtaBand />
     </>
   );
 }

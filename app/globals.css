@@ -11,8 +11,22 @@
     @apply text-slate-800;
     overflow-x: hidden;
   }
+  body {
+    background: #fafafa;
+  }
   ::selection {
-    background: rgba(34, 211, 238, 0.25);
+    background: rgba(0, 184, 196, 0.22);
+  }
+  /* Lenis smooth-scroll: let JS drive scrolling, disable native smooth so they don't fight */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 }
 
@@ -21,17 +35,29 @@
     @apply container mx-auto px-5 lg:px-8;
   }
 
-  /* buttons */
+  /* ── Section rhythm — tighter, premium (≈ 72–112px) ─────────────── */
+  .section {
+    @apply py-16 sm:py-20 lg:py-[7rem];
+  }
+  .section-tight {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-teal;
+  }
+
+  /* ── Buttons ────────────────────────────────────────────────────── */
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
   }
   .btn-cta {
-    @apply btn h-14 text-white shadow-[0_12px_30px_-8px_rgba(255,107,26,0.6)];
+    @apply btn h-14 text-white;
     background-image: linear-gradient(120deg, #ff7a18 0%, #f2520e 100%);
+    box-shadow: 0 12px 30px -8px rgba(255, 107, 26, 0.6);
   }
   .btn-cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 40px -8px rgba(255, 107, 26, 0.7);
+    box-shadow: 0 20px 44px -8px rgba(255, 107, 26, 0.72);
   }
   .btn-glass {
     @apply btn h-14 border border-white/20 bg-white/5 text-white backdrop-blur-md hover:bg-white/10;
@@ -39,12 +65,17 @@
   .btn-primary {
     @apply btn h-12 text-white;
     background-image: linear-gradient(120deg, #ff7a18 0%, #f2520e 100%);
+    box-shadow: 0 10px 24px -10px rgba(255, 107, 26, 0.6);
   }
   .btn-primary:hover {
     transform: translateY(-1px);
+    box-shadow: 0 16px 34px -10px rgba(255, 107, 26, 0.7);
+  }
+  .btn-light {
+    @apply btn h-12 border border-slate-200 bg-white text-slate-800 shadow-soft hover:border-brand-teal/40 hover:text-brand-teal;
   }
 
-  /* glass surfaces */
+  /* glass surfaces (hero) */
   .glass {
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -58,11 +89,55 @@
     -webkit-backdrop-filter: blur(24px);
   }
 
-  .section {
-    @apply py-20 sm:py-24 lg:py-28;
+  /* ── Premium light-surface card system ──────────────────────────── */
+  .card {
+    @apply rounded-2xl border border-slate-200/80 bg-white transition-all duration-300;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 28px -14px rgba(15, 23, 42, 0.16);
   }
-  .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-teal;
+  .card-hover:hover {
+    @apply -translate-y-1.5 border-brand-teal/30;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 28px 56px -20px rgba(14, 110, 132, 0.3);
+  }
+  /* gradient icon tile */
+  .icon-tile {
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-xl text-white;
+    background-image: linear-gradient(135deg, #15889f 0%, #0e6e84 100%);
+    box-shadow: 0 10px 22px -10px rgba(14, 110, 132, 0.55);
+  }
+
+  /* animated nav underline */
+  .nav-link {
+    position: relative;
+    @apply text-sm font-medium transition-colors duration-200;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, #0e6e84, #00b8c4);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover::after,
+  .nav-link[data-active="true"]::after {
+    transform: scaleX(1);
+  }
+
+  /* ── Marquee (toppers) — JS-driven scroll, edges faded ──────────── */
+  .marquee {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -76,16 +151,34 @@
     background-clip: text;
     color: transparent;
   }
+  .text-gradient-ink {
+    background-image: linear-gradient(120deg, #0f172a 0%, #0e6e84 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* fine grid texture for dark zones */
   .bg-grid {
     background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 56px 56px;
   }
-  /* dotted particle field */
+  /* dotted particle field (dark) */
   .bg-dots {
     background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1.4px);
     background-size: 26px 26px;
+  }
+  /* dotted field (light surfaces) */
+  .bg-dots-ink {
+    background-image: radial-gradient(rgba(8, 26, 47, 0.07) 1px, transparent 1.4px);
+    background-size: 24px 24px;
+  }
+  /* soft brand mesh for light sections */
+  .bg-mesh {
+    background-image:
+      radial-gradient(40% 50% at 12% 0%, rgba(0, 184, 196, 0.08), transparent 70%),
+      radial-gradient(38% 48% at 92% 12%, rgba(255, 107, 26, 0.06), transparent 70%);
   }
   /* subtle grain overlay */
   .grain::after {
@@ -95,5 +188,28 @@
     pointer-events: none;
     opacity: 0.4;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  /* ── Scroll reveal (driven by IntersectionObserver in <SmoothScroll>) ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

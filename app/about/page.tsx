@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GraduationCap, Users, ClipboardCheck, MessageCircleQuestion, BookOpen, FileBarChart } from "lucide-react";
 import { site, stats, highlights } from "@/lib/site";
 import { PageHero } from "@/components/page-hero";
+import { CtaBand } from "@/components/cta-band";
+
+const highlightIcons = [GraduationCap, Users, ClipboardCheck, MessageCircleQuestion, BookOpen, FileBarChart];
 
 export const metadata: Metadata = {
   title: "About",
@@ -38,31 +41,43 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-2xl bg-slate-50 p-6">
-                <p className="text-3xl font-extrabold text-brand-teal">{s.value}</p>
-                <p className="mt-1 text-sm text-slate-600">{s.label}</p>
+              <div key={s.label} className="card flex flex-col justify-center p-6">
+                <p className="font-display text-4xl font-extrabold text-gradient-ink">{s.value}</p>
+                <p className="mt-1.5 text-sm font-medium text-slate-600">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section bg-slate-50">
+      <section className="section bg-surface">
         <div className="container-x">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="reveal mx-auto max-w-2xl text-center">
             <p className="eyebrow">What Makes Us Unique</p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">Why students choose Varenyam</h2>
+            <h2 className="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl">Why students choose Varenyam</h2>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {highlights.map((h) => (
-              <div key={h.title} className="rounded-2xl border border-slate-200 bg-white p-6">
-                <h3 className="text-lg font-semibold text-slate-900">{h.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{h.body}</p>
-              </div>
-            ))}
+            {highlights.map((h, i) => {
+              const Icon = highlightIcons[i % highlightIcons.length];
+              return (
+                <div
+                  key={h.title}
+                  style={{ transitionDelay: `${(i % 3) * 80}ms` }}
+                  className="reveal card card-hover group p-6"
+                >
+                  <span className="icon-tile transition-transform duration-300 group-hover:-translate-y-0.5">
+                    <Icon size={22} />
+                  </span>
+                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{h.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{h.body}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
+
+      <CtaBand />
     </>
   );
 }

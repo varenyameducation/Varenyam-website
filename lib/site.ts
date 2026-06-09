@@ -8,13 +8,11 @@ export const site = {
   promise: "Empowering Minds, Shaping Futures",
   description:
     "Varenyam Education Centre, Indore — result-driven coaching for Classes 6 to 12 (CBSE, ICSE & State Board) across Science (PCM/PCB) and Commerce, with strong board results, small batches and mentors from IITs & NITs.",
-  // No public email on the brochures — replace with the real one when available.
-  email: "info@varenyameducation.in",
+  email: "varenyameducation@gmail.com",
   primaryPhone: "+91 78800 69393",
   social: {
-    instagram: "#",
-    facebook: "#",
-    youtube: "#",
+    instagram: "https://www.instagram.com/varenyameducation?igsh=MTllbHNmdmJyYzR6Mg==",
+    linkedin: "https://www.linkedin.com/company/varenyam-education/",
     whatsapp: "https://wa.me/917880069393",
   },
   // Teacher/admin portal (separate Vercel project + domain)
@@ -68,6 +66,7 @@ export type Course = {
   slug: string;
   name: string;
   grade: string;
+  duration: string;
   blurb: string;
   highlights: readonly string[];
   accent: "teal" | "red" | "gold";
@@ -78,6 +77,7 @@ export const courses: readonly Course[] = [
     slug: "foundation",
     name: "Foundation Programme",
     grade: "Classes 6–10",
+    duration: "Yearly · multi-year track",
     blurb:
       "Concept-first coaching in Maths, Science and Social Studies, aligned to CBSE along with NTSE, Olympiads and IMO preparation.",
     highlights: ["Maths · Science · Social", "CBSE · NTSE · Olympiads · IMO", "Weekly worksheets & tests"],
@@ -87,6 +87,7 @@ export const courses: readonly Course[] = [
     slug: "science",
     name: "Class 11 & 12 — Science",
     grade: "PCM / PCB",
+    duration: "2-year integrated · XI–XII",
     blurb:
       "Senior-secondary Science coaching for board and competitive readiness across Physics, Chemistry, Maths and Biology.",
     highlights: ["Physics · Chemistry · Maths", "Physics · Chemistry · Biology", "Board + competitive focus"],
@@ -96,6 +97,7 @@ export const courses: readonly Course[] = [
     slug: "commerce",
     name: "Class 11 & 12 — Commerce",
     grade: "Commerce Stream",
+    duration: "2-year integrated · XI–XII",
     blurb:
       "Complete Commerce coaching covering Accountancy, Economics, Business Studies and Mathematics with structured practice.",
     highlights: ["Accountancy · Economics", "Business Studies · Maths", "Exam-pattern practice papers"],
@@ -127,43 +129,46 @@ export const directors = [
     bio: "Education is the foundation of success and the key to unlocking one's true potential. With 15 years of teaching experience, I've seen the transformative power of quality education first-hand. Our institute is built on integrity, dedication and excellence — and we walk with every student on their journey to success.",
   },
   {
-    name: "Aayush Jaiswal",
-    role: "Director",
-    credential: "10 years experience · 1,500+ students mentored",
-    photo: "/people/ayush-jaiswal.jpg",
-    bio: "Education is the most powerful tool for shaping a bright future. Having mentored over 1,500 students in 10 years, I understand how strong fundamentals, consistent effort and the right guidance drive academic success. Our focus is not just on scoring well, but on a deep understanding of concepts that lasts a lifetime.",
-  },
-  {
     name: "Shubham Chouksey",
     role: "Director",
     credential: "M.Tech, IIT Gandhinagar",
     photo: "/people/shubham-chouksey.jpg",
     bio: "Education is not just about marks; it's about learning for life. Our faculty is committed to bringing out the best in every student through personalized attention, regular assessments and result-oriented strategies. At Varenyam, we don't just teach — we mentor, inspire and empower.",
   },
+  {
+    name: "Aayush Jaiswal",
+    role: "Director",
+    credential: "10 years experience · 1,500+ students mentored",
+    photo: "/people/ayush-jaiswal.jpg",
+    bio: "Education is the most powerful tool for shaping a bright future. Having mentored over 1,500 students in 10 years, I understand how strong fundamentals, consistent effort and the right guidance drive academic success. Our focus is not just on scoring well, but on a deep understanding of concepts that lasts a lifetime.",
+  },
 ] as const;
 
 // ── Results (Class 10 CBSE board toppers) ─────────────────────────────────
-export const toppers = [
-  { name: "Prakrati Dubey", score: "97%" },
-  { name: "Rishit Bhansali", score: "96.8%" },
-  { name: "Dwijal Vaja", score: "96.6%" },
-  { name: "Pooja Chhabada", score: "96%" },
-  { name: "Arush Sachdeva", score: "95.6%", note: "Class 10 Topper" },
-  { name: "Bhavisha Maheshwari", score: "95.6%", note: "Class 12 Topper" },
-  { name: "Palak Sodhani", score: "95%" },
-  { name: "Maanvi Tomar", score: "95%" },
-  { name: "Pavni Gupta", score: "94.4%" },
-  { name: "Anushka Khare", score: "93.6%" },
-  { name: "Riya Patidar", score: "93%" },
-  { name: "Harshita Punase", score: "92.4%" },
-  { name: "Saloni Makhwana", score: "91.8%" },
-  { name: "Ayush Nishant", score: "91.2%" },
-  { name: "Aryashi Khare", score: "91%" },
-  { name: "Akshat Gupta", score: "91%" },
-  { name: "Pihu Mittal", score: "91%" },
-  { name: "Tania Gurudasani", score: "90.2%" },
-  { name: "Harsh Vyas", score: "90%" },
-  { name: "Ansh Khare", score: "87%" },
+// Names, scores and photos sourced from the official Varenyam results leaflet.
+export type Topper = { name: string; score: string; photo: string };
+
+export const toppers: readonly Topper[] = [
+  { name: "Prakrati Dubey", score: "97%", photo: "/people/toppers/prakrati-dubey.jpeg" },
+  { name: "Rishit Bhansali", score: "96.8%", photo: "/people/toppers/rishit-bhansali.jpeg" },
+  { name: "Dwijal Vaja", score: "96.6%", photo: "/people/toppers/dwijal-vaja.jpeg" },
+  { name: "Pooja Chhabada", score: "96%", photo: "/people/toppers/pooja-chhabada.jpeg" },
+  { name: "Palak Sodhani", score: "95%", photo: "/people/toppers/palak-sodhani.jpeg" },
+  { name: "Maanvi Tomar", score: "95%", photo: "/people/toppers/maanvi-tomar.jpeg" },
+  { name: "Anushka Khare", score: "93.6%", photo: "/people/toppers/anushka-khare.jpeg" },
+  { name: "Harshita Punase", score: "92.4%", photo: "/people/toppers/harshita-punase.jpeg" },
+  { name: "Saloni Makhwana", score: "91.8%", photo: "/people/toppers/saloni-makhwana.jpeg" },
+  { name: "Ayush Nishant", score: "91.2%", photo: "/people/toppers/ayush-nishant.jpeg" },
+  { name: "Aryashi Khare", score: "91%", photo: "/people/toppers/aryashi-khare.jpeg" },
+  { name: "Akshat Gupta", score: "91%", photo: "/people/toppers/akshat-gupta.jpeg" },
+  { name: "Pihu Mittal", score: "91%", photo: "/people/toppers/pihu-mittal.jpeg" },
+  { name: "Tania Gurudasani", score: "90.2%", photo: "/people/toppers/tania-gurudasani.jpeg" },
+  { name: "Harsh Vyas", score: "90%", photo: "/people/toppers/harsh-vyas.jpeg" },
+  { name: "Ansh Khare", score: "87%", photo: "/people/toppers/ansh-khare.jpeg" },
+  { name: "Riddhima Mittal", score: "87%", photo: "/people/toppers/riddhima-mittal.jpeg" },
+  { name: "Pranjal Trivedi", score: "85%", photo: "/people/toppers/pranjal-trivedi.jpeg" },
+  { name: "Maahi Joshi", score: "84%", photo: "/people/toppers/maahi-joshi.jpeg" },
+  { name: "Nidhi Aute", score: "83%", photo: "/people/toppers/nidhi-aute.jpeg" },
 ] as const;
 
 // ── Testimonials ──────────────────────────────────────────────────────────
