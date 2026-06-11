@@ -7,6 +7,7 @@ import {
 import { site, highlights, courses, toppers, testimonials, directors } from "@/lib/site";
 import { CourseCard } from "@/components/course-card";
 import { Hero } from "@/components/hero";
+import { CampusShowcase } from "@/components/campus-showcase";
 import { TopperMarquee } from "@/components/topper-marquee";
 import { CtaBand } from "@/components/cta-band";
 
@@ -16,6 +17,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+
+      {/* ── Campus showcase (mobile only) ──────────────────── */}
+      <CampusShowcase />
 
       {/* ── Why Varenyam ───────────────────────────────────── */}
       <section className="relative section bg-mesh">

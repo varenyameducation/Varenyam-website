@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight, Phone, GraduationCap, Star, TrendingUp, Users, Trophy,
-  Atom, Stethoscope, BookOpen, LineChart, Target, ChevronDown,
+  Atom, Stethoscope, BookOpen, LineChart, Calendar, ShieldCheck, ChevronDown,
 } from "lucide-react";
 import { site, directors } from "@/lib/site";
 
@@ -11,12 +11,6 @@ const exams = [
   { label: "NEET", icon: Stethoscope },
   { label: "CBSE", icon: BookOpen },
   { label: "Commerce", icon: LineChart },
-];
-
-const trust = [
-  { icon: Star, value: "4.9/5", label: "Rating" },
-  { icon: Users, value: "5,000+", label: "Students" },
-  { icon: Target, value: "97%", label: "Success Rate" },
 ];
 
 export function Hero() {
@@ -117,57 +111,86 @@ export function Hero() {
       </div>
 
       {/* ════════════════ MOBILE ════════════════ */}
-      <div className="relative z-10 flex min-h-[1120px] flex-col lg:hidden">
-        {/* full-height dark wash over the shared artwork: readable top, visible student, dark base */}
+      <div className="relative z-10 flex min-h-screen flex-col items-center px-5 pb-14 pt-28 text-center lg:hidden">
+        {/* near-solid dark wash: the artwork reads as a clean premium canvas, base settles to navy */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 -z-10"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, rgba(2,6,23,0.94) 0%, rgba(2,6,23,0.82) 30%, rgba(2,6,23,0.12) 52%, rgba(2,6,23,0.5) 80%, #020617 96%)",
+              "linear-gradient(180deg, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.9) 42%, rgba(2,6,23,0.88) 72%, #020617 100%)",
           }}
         />
-        {/* glow behind student */}
-        <div className="pointer-events-none absolute left-1/2 top-[46%] h-72 w-72 -translate-x-1/2 rounded-full bg-brand-teal/25 blur-[100px]" />
+        {/* soft teal glow accent */}
+        <div className="pointer-events-none absolute left-1/2 top-[32%] -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-teal/20 blur-[110px]" />
 
-        {/* top text zone */}
-        <div className="relative px-5 pt-28">
-          <Badge />
-          <h1 className="animate-rise-in mt-6 font-display text-[2.05rem] font-bold leading-[1.08] tracking-[-0.02em] text-white sm:text-[2.6rem]" style={{ animationDelay: "0.08s" }}>
-            Where Focused<br />Preparation Meets<br />
-            <span className="text-gradient-teal">Real Results</span>
-            <span className="text-brand-orange">.</span>
-          </h1>
-          <p className="animate-rise-in mt-6 max-w-[300px] text-lg leading-relaxed text-white/75" style={{ animationDelay: "0.16s" }}>
-            Structured coaching for board and competitive exams, with proven results and expert faculty.
-          </p>
-          <div className="animate-rise-in mt-8 flex flex-col gap-4" style={{ animationDelay: "0.24s" }}>
-            <Link href="/courses" className="btn-cta group w-full">
-              Explore Courses
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-            <a href={`tel:${tel}`} className="btn-glass w-full">
-              <Phone size={17} /> Book a Free Demo
-            </a>
+        {/* badge */}
+        <div className="animate-rise-in inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium backdrop-blur-md shadow-[0_0_30px_-10px_rgba(34,211,238,0.5)]">
+          <span className="text-brand-cyan">JEE</span> <Dot />
+          <span className="text-brand-cyan">NEET</span> <Dot />
+          <span className="text-brand-cyan">CBSE</span> <Dot />
+          <span className="text-brand-gold">FOUNDATION</span>
+        </div>
+
+        {/* headline — the focal point */}
+        <h1 className="animate-rise-in mt-7 font-display text-[clamp(1.9rem,10vw,2.8rem)] font-bold leading-[1.0] tracking-[-0.02em] text-white" style={{ animationDelay: "0.08s" }}>
+          Where Focused<br />Preparation Meets<br />
+          <span className="text-gradient-teal">Real Results</span>
+          <span className="text-brand-orange">.</span>
+        </h1>
+
+        {/* description */}
+        <p className="animate-rise-in mt-5 max-w-[330px] text-[1.05rem] leading-relaxed text-white/70" style={{ animationDelay: "0.16s" }}>
+          Structured coaching for JEE, NEET and Boards with expert faculty and proven outcomes.
+        </p>
+
+        {/* CTAs — full width, stacked */}
+        <div className="animate-rise-in mt-8 flex w-full flex-col gap-4" style={{ animationDelay: "0.24s" }}>
+          <Link href="/courses" className="btn-cta group h-[60px] w-full text-base">
+            Explore Courses
+            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+          </Link>
+          <a href={`tel:${tel}`} className="btn-glass h-[60px] w-full text-base">
+            <Calendar size={18} className="text-brand-cyan" /> Book Free Demo
+          </a>
+        </div>
+
+        {/* trust stats — open, hairline-divided */}
+        <div className="animate-rise-in mt-10 grid w-full max-w-[360px] grid-cols-3 divide-x divide-white/10" style={{ animationDelay: "0.32s" }}>
+          <div className="flex flex-col items-center justify-center gap-1.5 px-2">
+            <Star size={22} className="fill-brand-gold text-brand-gold" />
+            <p className="font-display text-xl font-bold text-white">4.9/5</p>
+            <p className="text-xs text-white/55">Rating</p>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-1.5 px-2">
+            <Users size={22} className="text-brand-cyan" />
+            <p className="font-display text-xl font-bold text-white">5,000+</p>
+            <p className="text-xs text-white/55">Students</p>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-1.5 px-2">
+            <ShieldCheck size={22} className="text-brand-cyan" />
+            <p className="text-xs leading-tight text-white/70">Trusted by<br />Thousands</p>
           </div>
         </div>
 
-        {/* bottom: trust stat bar + scroll cue */}
-        <div className="relative mt-auto px-5 pb-10 pt-6">
-          <div className="glass-strong grid grid-cols-3 overflow-hidden rounded-2xl shadow-glass">
-            {trust.map((t, i) => (
-              <div key={t.label} className={`flex min-w-0 flex-col items-center gap-1 px-1 py-5 text-center ${i > 0 ? "border-l border-white/10" : ""}`}>
-                <t.icon size={18} className={i === 0 ? "fill-brand-gold text-brand-gold" : "text-brand-cyan"} />
-                <p className="font-display text-lg font-bold text-white">{t.value}</p>
-                <p className="text-[10px] leading-tight text-white/55">{t.label}</p>
-              </div>
+        {/* avatar trust strip */}
+        <div className="animate-rise-in mt-8 flex items-center justify-center gap-3" style={{ animationDelay: "0.4s" }}>
+          <div className="flex -space-x-3">
+            {directors.map((d) => (
+              <span key={d.name} className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-ink">
+                <Image src={d.photo} alt="" fill className="object-cover object-[center_40%]" sizes="36px" />
+              </span>
             ))}
           </div>
-          <div className="mt-8 flex flex-col items-center gap-2 text-white/55">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 animate-float">
-              <ChevronDown size={18} />
-            </span>
-            <span className="text-xs">Scroll to explore</span>
-          </div>
+          <p className="max-w-[185px] text-left text-sm leading-tight text-white/70">
+            Trusted by thousands of students and parents
+          </p>
+        </div>
+
+        {/* scroll cue */}
+        <div className="mt-auto flex justify-center pt-10">
+          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/60 animate-float">
+            <ChevronDown size={18} />
+          </span>
         </div>
       </div>
     </section>
