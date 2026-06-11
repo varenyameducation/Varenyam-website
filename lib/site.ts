@@ -16,7 +16,7 @@ export const site = {
     whatsapp: "https://wa.me/917880069393",
   },
   // Teacher/admin portal (separate Vercel project + domain)
-  portalUrl: "https://portal.varenyam.com",
+  portalUrl: "https://varenyamedtech.in/",
 } as const;
 
 export const centres = [

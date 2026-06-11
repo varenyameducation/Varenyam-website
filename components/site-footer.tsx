@@ -74,7 +74,7 @@ export function SiteFooter() {
       <div className="relative border-t border-white/10">
         <div className="container-x flex flex-col items-center justify-between gap-2 py-6 text-xs text-white/55 sm:flex-row">
           <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-          <a href={site.portalUrl} className="inline-flex items-center gap-1 transition-colors hover:text-white">
+          <a href={site.portalUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 transition-colors hover:text-white">
             Student / Teacher Portal <ArrowUpRight size={13} />
           </a>
         </div>
